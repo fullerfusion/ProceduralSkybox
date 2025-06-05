@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Skybox
-  m_Shader: {fileID: -6465566751694194690, guid: 1979ee243013e401d93ddcfa23f91904, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 77dd576ec493e4bab8704ed8b42bbcc1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -126,6 +126,8 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Float: 0
+    - _Float_1: 0.15
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -165,17 +167,17 @@ Material:
     - _Day_MidColor: {r: 0, g: 0.3558126, b: 1.585654, a: 1}
     - _Day_Zenith_Color: {r: 0, g: 0.20675278, b: 0.62264144, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GradientOutputRange: {r: 0, g: 1, b: 0, a: 0}
+    - _GradientOutputRange: {r: 0.2, g: 1, b: 0, a: 0}
     - _HorizonHeight: {r: -1.5, g: 1, b: 0, a: 0}
     - _Horizon_Color: {r: 0.9953571, g: 1, b: 0.8726415, a: 1}
     - _MainLightDirection: {r: 0, g: 0, b: 0, a: 0}
     - _Main_Color: {r: 0, g: 0.3558126, b: 1.585654, a: 1}
     - _MoonColor: {r: 0.8017977, g: 1.8679243, b: 1.8579949, a: 1}
-    - _NightHorizonColor: {r: 0.23922014, g: 0.23922014, b: 0.46182778, a: 1}
+    - _NightHorizonColor: {r: 0.39198923, g: 0.38473615, b: 1.0592736, a: 1}
     - _NightHorizonColor_1: {r: 0.65837485, g: 0.5271152, b: 0.37626222, a: 1}
-    - _NightMidColor: {r: 0.04, g: 0.04, b: 0.36, a: 1}
+    - _NightMidColor: {r: 0.0047663664, g: 0.00609416, b: 0.09186087, a: 1}
     - _NightMidColor_1: {r: 0.5840785, g: 0.1620294, b: 0.019382361, a: 1}
-    - _NightZenithColor: {r: 0.011555556, g: 0.007999999, b: 0.04, a: 1}
+    - _NightZenithColor: {r: 0.0070903003, g: 0.0042274813, b: 0.047169805, a: 1}
     - _NightZenithColor_1: {r: 0.4811321, g: 0, b: 0.03761391, a: 1}
     - _Night_Horizon_Color: {r: 0.23137254, g: 0.2606145, b: 0.5294118, a: 1}
     - _Night_Mid_Color: {r: 0.11869692, g: 0.06977572, b: 0.3018868, a: 1}
@@ -185,7 +187,7 @@ Material:
     - _SunDirection: {r: 0, g: -1, b: 0.09, a: 0}
     - _Sun_Color: {r: 1, g: 0.81927705, b: 0, a: 1}
     - _Sun_Direction: {r: 0.35, g: -0.21, b: 1, a: 0}
-    - _SunriseHorizonColor: {r: 0.74540436, g: 0.6724432, b: 0.47353154, a: 1}
+    - _SunriseHorizonColor: {r: 0.046587773, g: 0.0420277, b: 0.029595722, a: 1}
     - _SunriseMidColor: {r: 0.7529423, g: 0.23839766, b: 0.2917707, a: 1}
     - _SunriseZenithColor: {r: 0.2581829, g: 0.12477184, b: 0.46207705, a: 1}
     - _SunsetHorizonColor: {r: 0.48672274, g: 0.13112536, b: 0.023332542, a: 1}
