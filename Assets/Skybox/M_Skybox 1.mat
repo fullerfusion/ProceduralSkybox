@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Skybox
+  m_Name: M_Skybox 1
   m_Shader: {fileID: -6465566751694194690, guid: 1979ee243013e401d93ddcfa23f91904, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -151,16 +151,16 @@ Material:
     - _Sunrise: 0.15
     - _Sunset: 0.6
     - _Surface: 0
-    - _TimeOfDay: 0.69
+    - _TimeOfDay: 0.85
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DayHorizonColor: {r: 1.0592737, g: 1.0515705, b: 0.8744005, a: 1}
-    - _DayMidColor: {r: 0, g: 0.15845063, b: 0.7490196, a: 1}
-    - _DayZenithColor: {r: 0.5471436, g: 0, b: 0.7529412, a: 1}
+    - _DayHorizonColor: {r: 1.0121933, g: 0.99470145, b: 0.81427014, a: 1}
+    - _DayMidColor: {r: 0.11294133, g: 0.39538452, b: 1.7437656, a: 1}
+    - _DayZenithColor: {r: 0.038727432, g: 0.06871577, b: 0.7093116, a: 1}
     - _Day_HorizonColor: {r: 0.97755456, g: 0.9811321, b: 0.85617656, a: 1}
     - _Day_MidColor: {r: 0, g: 0.3558126, b: 1.585654, a: 1}
     - _Day_Zenith_Color: {r: 0, g: 0.20675278, b: 0.62264144, a: 1}
