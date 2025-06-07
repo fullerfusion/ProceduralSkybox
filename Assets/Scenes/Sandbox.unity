@@ -243,9 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ef727c45473de48ac2c058177003bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOfDay: 0
+  timeOfDay: 0.169
   dayLengthInMinutes: 0.5
-  autoRun_TOD: 0
+  autoRun_TOD: 1
   celestialPivot: {fileID: 800865499}
   axialTilt: 23.5
   celestialTilt: {x: 0, y: 360}
