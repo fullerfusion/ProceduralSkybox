@@ -16,15 +16,22 @@ public class DayNightCycleController : MonoBehaviour
     public Light ambientFillLight; // New ambient boost light
     public Material skyMaterial;
 
+    [Header("Light Intensity")]
     public AnimationCurve sunIntensityCurve;
+    public AnimationCurve moonIntensityCurve;
     public float sunMultiplier = 2.5f;
+
+    [Header("Light Fade Controls")]
+    public AnimationCurve sunBlendCurve;
+    public AnimationCurve moonBlendCurve;
+
+    [Header("Ambient Light")]
     public float ambientLight_Intensity = 0.25f;
     public float ambientZenith_multiplier = 1.2f;
     public float ambientMid_multiplier = 0.95f;
     public float ambientHorizon_multiplier = 0.8f;
 
-    public AnimationCurve moonIntensityCurve;
-
+    [Header("Color Tint")]
     public Gradient SunColorGradient; // Separate sun tint gradient
 
     public enum SkyPhase { Sunrise, Day, Sunset, Night }
@@ -60,6 +67,17 @@ public class DayNightCycleController : MonoBehaviour
             timeOfDay += Time.deltaTime / (dayLengthInMinutes * 60f);
             if (timeOfDay > 1f) timeOfDay -= 1f;
         }
+
+        // Compute blend weights using artist-defined curves
+        float sunBlend = Mathf.Clamp01(sunBlendCurve.Evaluate(timeOfDay));
+        float moonBlend = Mathf.Clamp01(moonBlendCurve.Evaluate(timeOfDay));
+
+        // Apply intensity and shadow transitions
+        sunLight.intensity = sunIntensityCurve.Evaluate(timeOfDay) * sunBlend * sunMultiplier;
+        moonLight.intensity = moonIntensityCurve.Evaluate(timeOfDay) * moonBlend * sunMultiplier;
+
+        sunLight.shadowStrength = sunBlend;
+        moonLight.shadowStrength = moonBlend;
 
         skyMaterial.SetFloat("_TimeOfDay", timeOfDay);
 
