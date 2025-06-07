@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
 
 public class DayNightCycleController : MonoBehaviour
 {
@@ -68,7 +67,7 @@ public class DayNightCycleController : MonoBehaviour
             if (timeOfDay > 1f) timeOfDay -= 1f;
         }
 
-        // Compute blend weights using artist-defined curves
+        // Compute blend weights using animation curves for better visual controls
         float sunBlend = Mathf.Clamp01(sunBlendCurve.Evaluate(timeOfDay));
         float moonBlend = Mathf.Clamp01(moonBlendCurve.Evaluate(timeOfDay));
 
