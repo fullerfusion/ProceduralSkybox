@@ -151,16 +151,16 @@ Material:
     - _Sunrise: 0.15
     - _Sunset: 0.6
     - _Surface: 0
-    - _TimeOfDay: 0.6443035
+    - _TimeOfDay: 0.63538516
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DayHorizonColor: {r: 0.46761206, g: 0.13947178, b: 0.057190515, a: 1}
-    - _DayMidColor: {r: 0.92587453, g: 0.34772983, b: 0.13661613, a: 1}
-    - _DayZenithColor: {r: 0.11978606, g: 0.09190257, b: 0.49930364, a: 1}
+    - _DayHorizonColor: {r: 0.47644132, g: 0.13561569, b: 0.041547906, a: 1}
+    - _DayMidColor: {r: 0.960121, g: 0.35962617, b: 0.12798049, a: 1}
+    - _DayZenithColor: {r: 0.12397008, g: 0.095146105, b: 0.51705956, a: 1}
     - _Day_HorizonColor: {r: 0.97755456, g: 0.9811321, b: 0.85617656, a: 1}
     - _Day_MidColor: {r: 0, g: 0.3558126, b: 1.585654, a: 1}
     - _Day_Zenith_Color: {r: 0, g: 0.20675278, b: 0.62264144, a: 1}
@@ -183,7 +183,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SunColor: {r: 11.984314, g: 6.5311356, b: 0, a: 1}
     - _SunDirection: {r: 0, g: -1, b: 0.09, a: 0}
-    - _SunRotation: {r: -0.38373405, g: 0.1883971, b: 0.90402144, a: 0}
+    - _SunRotation: {r: -0.3872545, g: 0.13309811, b: 0.91231513, a: 0}
     - _Sun_Color: {r: 1, g: 0.81927705, b: 0, a: 1}
     - _Sun_Direction: {r: 0.35, g: -0.21, b: 1, a: 0}
     - _SunriseHorizonColor: {r: 0.74540436, g: 0.6724432, b: 0.47353154, a: 1}
