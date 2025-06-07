@@ -68,15 +68,12 @@ public class DayNightCycleController : MonoBehaviour
 
         sunLight.transform.localRotation = Quaternion.Euler(sunAngle, 0, 0);
         moonLight.transform.localRotation = Quaternion.Euler(moonAngle, 0, 0);
-        Debug.Log($"sunDir: {-sunLight.transform.forward}");
         skyMaterial.SetVector("_SunRotation", sunLight.transform.forward);
-        //UpdateCelestialBodies();
 
         SkyPhase currentPhase;
         SkyPhase nextPhase;
         float t;
         GetPhaseData(timeOfDay, out currentPhase, out nextPhase, out t);
-
 
         //sun gradient for different colored sun 
         sunLight.color = SunColorGradient.Evaluate(timeOfDay);
@@ -85,6 +82,24 @@ public class DayNightCycleController : MonoBehaviour
         //moon intensity
         moonLight.intensity = moonIntensityCurve.Evaluate(timeOfDay) * sunMultiplier;
 
+        //update emabient light source
+        UpdateAmbientLighting(currentPhase, nextPhase, t, sunAngle);
+        //update environement gradient in lighting tab
+        UpdateAmbientEnvironment(currentPhase, nextPhase, t, sunAngle);
+
+    }
+
+    public void UpdateAmbientEnvironment(SkyPhase currentPhase, SkyPhase nextPhase, float t, float sunAngle)
+    {
+        Color blendedHorizon, blendedMid, blendedZenith;
+        GetBlendedSkyColor(currentPhase, nextPhase, t, out blendedHorizon, out blendedMid, out blendedZenith);
+        skyMaterial.SetColor("_DayZenithColor", blendedZenith);
+        skyMaterial.SetColor("_DayMidColor", blendedMid);
+        skyMaterial.SetColor("_DayHorizonColor", blendedHorizon);
+    }
+
+    public void UpdateAmbientLighting(SkyPhase currentPhase, SkyPhase nextPhase, float t, float sunAngle)
+    {
         //get ambient light values
         Color amb_blendedHorizon, amb_blendedMid, amb_blendedZenith;
         GetBlendedAmbientSkyColor(currentPhase, nextPhase, t, out amb_blendedHorizon, out amb_blendedMid, out amb_blendedZenith);
@@ -97,30 +112,6 @@ public class DayNightCycleController : MonoBehaviour
         //setup ambient light color
         AmbientLightSource(sunAngle, amb_blendedMid);
 
-        Color blendedHorizon, blendedMid, blendedZenith;
-        GetBlendedSkyColor(currentPhase, nextPhase, t, out blendedHorizon, out blendedMid, out blendedZenith);
-        skyMaterial.SetColor("_DayZenithColor", blendedZenith);
-        skyMaterial.SetColor("_DayMidColor", blendedMid);
-        skyMaterial.SetColor("_DayHorizonColor", blendedHorizon);
-        /*
-        Color todColor = CalculateBlendedSkyColor(
-            RenderSettings.sun.transform.forward,
-            amb_blendedHorizon,
-            amb_blendedMid,
-            amb_blendedZenith
-        );
-        AmbientLightSource(sunAngle, todColor);
-        */
-
-
-    }
-
-    void UpdateCelestialBodies()
-    {
-        float sunRotation = timeOfDay * 360f;
-        celestialPivot.localRotation = Quaternion.Euler(axialTilt, sunRotation, 0);
-        sunLight.transform.rotation = celestialPivot.rotation;
-        moonLight.transform.rotation = celestialPivot.rotation * Quaternion.Euler(180f, 0, 0);
     }
 
     public void AmbientLightSource(float sunAngle, Color blendedMid)
