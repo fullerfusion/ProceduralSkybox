@@ -1383,7 +1383,7 @@
     "m_Title": "Day",
     "m_Position": {
         "x": -612.0,
-        "y": -687.5
+        "y": -687.4999389648438
     }
 }
 
@@ -2819,7 +2819,7 @@
     "m_Group": {
         "m_Id": "a52517cc84344d07bb1c937178abbef6"
     },
-    "m_Name": "SunShader_db009",
+    "m_Name": "SunShader",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -3346,7 +3346,7 @@
     "m_Group": {
         "m_Id": "e6f85544d53a4f7db40bc9f85b95bd80"
     },
-    "m_Name": "SunShader_db009",
+    "m_Name": "SunShader",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -3468,7 +3468,7 @@
     "m_ObjectId": "a52517cc84344d07bb1c937178abbef6",
     "m_Title": "Moon",
     "m_Position": {
-        "x": -647.5,
+        "x": -647.4999389648438,
         "y": 341.0
     }
 }
@@ -4350,7 +4350,7 @@
     "m_ObjectId": "e6f85544d53a4f7db40bc9f85b95bd80",
     "m_Title": "Sun",
     "m_Position": {
-        "x": -491.0,
+        "x": -490.9998474121094,
         "y": -198.0
     }
 }
