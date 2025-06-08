@@ -147,7 +147,9 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _StarDensity: 25
+    - _StarIntensity: 35
     - _StarPower: 0
+    - _StarTiling: 1
     - _Star_Intensity: 40
     - _Star_Tiling: 1
     - _Stars: 10
@@ -189,6 +191,7 @@ Material:
     - _Night_Mid_Color: {r: 0.11869692, g: 0.06977572, b: 0.3018868, a: 1}
     - _Night_Zenith_Color: {r: 0.09221281, g: 0.03921568, b: 0.20784314, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _StarColors: {r: 0, g: 0.75522417, b: 2.2561824, a: 1}
     - _SunColor: {r: 11.984314, g: 6.5311356, b: 0, a: 1}
     - _SunDirection: {r: 0, g: -1, b: 0.09, a: 0}
     - _SunRotation: {r: -0.0027961433, g: 0.99997437, b: 0.0065873303, a: 0}
