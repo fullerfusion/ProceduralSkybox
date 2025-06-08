@@ -126,6 +126,9 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Float: 7.9
+    - _Float_1: 0
+    - _Float_2: 6.29
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -143,6 +146,11 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _StarDensity: 25
+    - _StarPower: 0
+    - _Star_Intensity: 100
+    - _Star_Tiling: 1
+    - _Stars: 10
     - _SunSharpness: -10.65
     - _SunSize: 0.004
     - _Sun_Intensity: 5
@@ -151,16 +159,16 @@ Material:
     - _Sunrise: 0.15
     - _Sunset: 0.6
     - _Surface: 0
-    - _TimeOfDay: 0.1625803
+    - _TimeOfDay: 0.863
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DayHorizonColor: {r: 0.7629536, g: 0.6936411, b: 0.4959451, a: 1}
-    - _DayMidColor: {r: 0.7108435, g: 0.24872415, b: 0.3872819, a: 1}
-    - _DayZenithColor: {r: 0.24374728, g: 0.12108451, b: 0.47833997, a: 1}
+    - _DayHorizonColor: {r: 0.2511003, g: 0.23403159, b: 0.44077998, a: 1}
+    - _DayMidColor: {r: 0.08608009, g: 0.056007028, b: 0.34838036, a: 1}
+    - _DayZenithColor: {r: 0.017185329, g: 0.012364318, b: 0.063891366, a: 1}
     - _Day_HorizonColor: {r: 0.97755456, g: 0.9811321, b: 0.85617656, a: 1}
     - _Day_MidColor: {r: 0, g: 0.3558126, b: 1.585654, a: 1}
     - _Day_Zenith_Color: {r: 0, g: 0.20675278, b: 0.62264144, a: 1}
@@ -183,7 +191,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SunColor: {r: 11.984314, g: 6.5311356, b: 0, a: 1}
     - _SunDirection: {r: 0, g: -1, b: 0.09, a: 0}
-    - _SunRotation: {r: 0.37277174, g: -0.29968864, b: -0.8781958, a: 0}
+    - _SunRotation: {r: -0.0027961433, g: 0.99997437, b: 0.0065873303, a: 0}
     - _Sun_Color: {r: 1, g: 0.81927705, b: 0, a: 1}
     - _Sun_Direction: {r: 0.35, g: -0.21, b: 1, a: 0}
     - _SunriseHorizonColor: {r: 0.74540436, g: 0.6724432, b: 0.47353154, a: 1}
@@ -192,6 +200,7 @@ Material:
     - _SunsetHorizonColor: {r: 0.48672274, g: 0.13112536, b: 0.023332542, a: 1}
     - _SunsetMidColor: {r: 1, g: 0.3734791, b: 0.11792451, a: 1}
     - _SunsetZenithColor: {r: 0.12884223, g: 0.09892311, b: 0.5377358, a: 1}
+    - _Vector2: {r: 8, g: 2, b: 0, a: 0}
     - _Vector3: {r: 0.5, g: 0.5, b: -0.5, a: 0}
     - _WorldSpaceLightPos0: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
