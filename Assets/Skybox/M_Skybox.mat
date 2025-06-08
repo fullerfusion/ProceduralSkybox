@@ -148,7 +148,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _StarDensity: 25
     - _StarPower: 0
-    - _Star_Intensity: 100
+    - _Star_Intensity: 40
     - _Star_Tiling: 1
     - _Stars: 10
     - _SunSharpness: -10.65
