@@ -11,7 +11,9 @@ public class DayNightCycleController : MonoBehaviour
     [SerializeField] private float axialTilt = 23.5f; // earth-like
     public Vector2 celestialTilt = new Vector2(-90,270);
     public Light sunLight;
+    public float sunOffset;
     public Light moonLight;
+    public float moonOffset;
     public Light ambientFillLight; // New ambient boost light
     public Material skyMaterial;
 
@@ -57,6 +59,8 @@ public class DayNightCycleController : MonoBehaviour
     public SkyPhaseColors amb_dayColors;
     public SkyPhaseColors amb_sunsetColors;
     public SkyPhaseColors amb_nightColors;
+    public GameObject fakeMoon;
+    public GameObject fakeSun;
 
 
     void Update()
@@ -85,7 +89,10 @@ public class DayNightCycleController : MonoBehaviour
 
         sunLight.transform.localRotation = Quaternion.Euler(sunAngle, 0, 0);
         moonLight.transform.localRotation = Quaternion.Euler(moonAngle, 0, 0);
-        skyMaterial.SetVector("_SunRotation", sunLight.transform.forward);
+        fakeSun.transform.localRotation = Quaternion.Euler(sunAngle + (sunIntensityCurve.Evaluate(timeOfDay) * sunOffset), 0, 0);
+        fakeMoon.transform.localRotation = Quaternion.Euler(moonAngle + (moonIntensityCurve.Evaluate(timeOfDay) * moonOffset), 0, 0);
+        skyMaterial.SetVector("_SunRotation", fakeSun.transform.forward);
+        skyMaterial.SetVector("_MoonRotation", fakeMoon.transform.forward);
 
         SkyPhase currentPhase;
         SkyPhase nextPhase;
@@ -138,7 +145,9 @@ public class DayNightCycleController : MonoBehaviour
         {
             ambientFillLight.transform.rotation = Quaternion.Euler(-sunAngle, 0, 0);
             ambientFillLight.color = blendedMid;
-            ambientFillLight.intensity = ambientLight_Intensity;
+            float _amb = Mathf.Max(sunLight.intensity, moonLight.intensity) - .1f;
+            _amb = Mathf.Min(ambientLight_Intensity, _amb);
+            ambientFillLight.intensity = _amb;
         }
     }
 
