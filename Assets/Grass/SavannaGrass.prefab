@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -4128638026162721444, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4128638026162721444, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -3957292672666792398, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -76,21 +84,41 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1672577303814665717, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_Size
+      value: 3.349888
+      objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
       propertyPath: m_FadeMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_LODs.Array.data[0].fadeTransitionWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_LODs.Array.data[2].fadeTransitionWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.8885469
+      value: 0.8455897
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
       propertyPath: m_LODs.Array.data[1].screenRelativeHeight
-      value: 0.4276803
+      value: 0.40021643
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
       propertyPath: m_LODs.Array.data[2].screenRelativeHeight
-      value: 0.053608313
+      value: 0.09773073
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
+      propertyPath: m_LODs.Array.data[3].screenRelativeHeight
+      value: 0.06243867
       objectReference: {fileID: 0}
     - target: {fileID: 5457710509582326032, guid: 90228bd3ed494498a8378ed5f2ceb94f, type: 3}
       propertyPath: m_CastShadows
@@ -136,12 +164,12 @@ MonoBehaviour:
   _render: 1
   _overrideRendering: 1
   _renderDistance: 0
-  _overrideRenderDistance: 1
-  _renderShadows: 1
+  _overrideRenderDistance: 0
+  _renderShadows: 0
   _overrideRenderShadows: 0
   _shadowDistance: 0
   _overrideShadowDistance: 0
-  _densityInDistance: 0.125
+  _densityInDistance: 0.75
   _overrideDensityInDistance: 1
-  _densityInDistanceFalloff: {x: 0.07999998, y: 0.007499993}
+  _densityInDistanceFalloff: {x: 0.09136522, y: 0.066334486}
   _overrideDensityInDistanceFalloff: 1

@@ -32,7 +32,11 @@ Material:
   - _SPECULARHIGHLIGHTS_OFF
   - _WIND
   m_InvalidKeywords:
+  - _BAKEDMESHDATA_OFF
   - _INTERACTION_OFF
+  - _LINKMAPTILINGOFFSET_ON
+  - _OVERLAY_OFF
+  - _TRANSLUCENCY_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
