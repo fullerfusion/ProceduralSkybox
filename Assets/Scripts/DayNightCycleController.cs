@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class DayNightCycleController : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class DayNightCycleController : MonoBehaviour
 
     [SerializeField] private Transform celestialPivot;
     [SerializeField] private float axialTilt = 23.5f; // earth-like
-    public Vector2 celestialTilt = new Vector2(-90,270);
-    public Light sunLight;
-    public Light moonLight;
+    public Vector2 celestialTilt = new Vector2(-90, 270);
+
+    public Light mainLight;
+    //public Light sunLight;
+    public float sunOffset = 1;
+    //public Light moonLight;
+    public float moonOffset = 1;
     public Light ambientFillLight; // New ambient boost light
     public Material skyMaterial;
 
@@ -32,6 +37,7 @@ public class DayNightCycleController : MonoBehaviour
 
     [Header("Color Tint")]
     public Gradient SunColorGradient; // Separate sun tint gradient
+    public Gradient MoonColorGradient; // Separate sun tint gradient
 
     public enum SkyPhase { Sunrise, Day, Sunset, Night }
 
@@ -57,8 +63,16 @@ public class DayNightCycleController : MonoBehaviour
     public SkyPhaseColors amb_dayColors;
     public SkyPhaseColors amb_sunsetColors;
     public SkyPhaseColors amb_nightColors;
-
-
+    public GameObject fakeMoon;
+    public GameObject fakeSun;
+    public List<float> phaseTimeShifts = new List<float>() { 0.125f,  0.375f, 0.62f, 0.80f };
+    // Optimization cache
+    private float lastEnvUpdate = 0f;
+    public float envUpdateInterval = 0.1f;
+    private Color lastSkyZenithColor;
+    private Color lastSkyMidColor;
+    private Color lastSkyHorizonColor;
+    [ContextMenu("Tick")]
     void Update()
     {
         if(autoRun_TOD)
@@ -67,52 +81,80 @@ public class DayNightCycleController : MonoBehaviour
             if (timeOfDay > 1f) timeOfDay -= 1f;
         }
 
-        // Compute blend weights using animation curves for better visual controls
+        float sunIntensityEval = sunIntensityCurve.Evaluate(timeOfDay);
+        float moonIntensityEval = moonIntensityCurve.Evaluate(timeOfDay);
         float sunBlend = Mathf.Clamp01(sunBlendCurve.Evaluate(timeOfDay));
         float moonBlend = Mathf.Clamp01(moonBlendCurve.Evaluate(timeOfDay));
 
-        // Apply intensity and shadow transitions
-        sunLight.intensity = sunIntensityCurve.Evaluate(timeOfDay) * sunBlend * sunMultiplier;
-        moonLight.intensity = moonIntensityCurve.Evaluate(timeOfDay) * moonBlend * sunMultiplier;
+        float sunLightIntensity = sunIntensityEval * sunMultiplier;
+        float moonLightIntensity = moonIntensityEval * sunMultiplier;
 
-        sunLight.shadowStrength = sunBlend;
-        moonLight.shadowStrength = moonBlend;
+        float sunAngle = Mathf.Lerp(celestialTilt.x, celestialTilt.y, timeOfDay);
+        float moonAngle = sunAngle;
 
         skyMaterial.SetFloat("_TimeOfDay", timeOfDay);
 
-        float sunAngle = Mathf.Lerp(celestialTilt.x, celestialTilt.y, timeOfDay);        
-        float moonAngle = sunAngle - 180f;
+        if (sunLightIntensity > moonLightIntensity)
+        {
+            mainLight.transform.localRotation = Quaternion.Euler(sunAngle + sunIntensityEval, 0, 0);
+            mainLight.intensity = sunLightIntensity;
+            mainLight.shadowStrength = sunBlend;
+            Debug.Log("Enable sun color and moon color gradients");
+            //sun gradient for different colored sun 
+            //mainLight.color = SunColorGradient.Evaluate(timeOfDay);
+        }
+        else
+        {
+            mainLight.transform.localRotation = Quaternion.Euler((moonAngle - 180) + moonIntensityEval, 0, 0);
+            mainLight.intensity = moonLightIntensity;
+            mainLight.shadowStrength = moonBlend;
+            //moon gradient for different colored sun 
+            //mainLight.color = MoonColorGradient.Evaluate(timeOfDay);
+        }
 
-        sunLight.transform.localRotation = Quaternion.Euler(sunAngle, 0, 0);
-        moonLight.transform.localRotation = Quaternion.Euler(moonAngle, 0, 0);
-        skyMaterial.SetVector("_SunRotation", sunLight.transform.forward);
 
-        SkyPhase currentPhase;
-        SkyPhase nextPhase;
-        float t;
-        GetPhaseData(timeOfDay, out currentPhase, out nextPhase, out t);
+        fakeSun.transform.localRotation = Quaternion.Euler(sunAngle + sunIntensityEval * sunOffset, 0, 0);
+        fakeMoon.transform.localRotation = Quaternion.Euler((moonAngle - 180) + moonIntensityEval * moonOffset, 0, 0);
+        skyMaterial.SetVector("_SunRotation", fakeSun.transform.forward);
+        skyMaterial.SetVector("_MoonRotation", fakeMoon.transform.forward);
 
-        //sun gradient for different colored sun 
-        sunLight.color = SunColorGradient.Evaluate(timeOfDay);
-        //sun intensity
-        sunLight.intensity = sunIntensityCurve.Evaluate(timeOfDay) * sunMultiplier;
-        //moon intensity
-        moonLight.intensity = moonIntensityCurve.Evaluate(timeOfDay) * sunMultiplier;
 
-        //update emabient light source
-        UpdateAmbientLighting(currentPhase, nextPhase, t, sunAngle);
-        //update environement gradient in lighting tab
-        UpdateAmbientEnvironment(currentPhase, nextPhase, t, sunAngle);
+        GetPhaseData(timeOfDay, out SkyPhase currentPhase, out SkyPhase nextPhase, out float t);
+
+        // Throttled environment + ambient updates
+        if (Time.time - lastEnvUpdate > envUpdateInterval)
+        {
+            //update emabient light source
+            UpdateAmbientLighting(currentPhase, nextPhase, t, sunAngle);
+            //update environement gradient in lighting tab
+            UpdateAmbientEnvironment(currentPhase, nextPhase, t);
+            lastEnvUpdate = Time.time;
+        }
 
     }
 
-    public void UpdateAmbientEnvironment(SkyPhase currentPhase, SkyPhase nextPhase, float t, float sunAngle)
+    public void UpdateAmbientEnvironment(SkyPhase currentPhase, SkyPhase nextPhase, float t)
     {
         Color blendedHorizon, blendedMid, blendedZenith;
         GetBlendedSkyColor(currentPhase, nextPhase, t, out blendedHorizon, out blendedMid, out blendedZenith);
-        skyMaterial.SetColor("_DayZenithColor", blendedZenith);
-        skyMaterial.SetColor("_DayMidColor", blendedMid);
-        skyMaterial.SetColor("_DayHorizonColor", blendedHorizon);
+
+        if(lastSkyZenithColor != blendedZenith)
+        {
+            skyMaterial.SetColor("_DayZenithColor", blendedZenith);
+            lastSkyZenithColor = blendedZenith;
+        }
+
+        if(lastSkyMidColor != blendedMid)
+        {
+            skyMaterial.SetColor("_DayMidColor", blendedMid);
+            lastSkyMidColor = blendedMid;
+        }
+
+        if(lastSkyHorizonColor != blendedHorizon)
+        {
+            skyMaterial.SetColor("_DayHorizonColor", blendedHorizon);
+            lastSkyHorizonColor = blendedHorizon;
+        }
     }
 
     public void UpdateAmbientLighting(SkyPhase currentPhase, SkyPhase nextPhase, float t, float sunAngle)
@@ -138,41 +180,48 @@ public class DayNightCycleController : MonoBehaviour
         {
             ambientFillLight.transform.rotation = Quaternion.Euler(-sunAngle, 0, 0);
             ambientFillLight.color = blendedMid;
-            ambientFillLight.intensity = ambientLight_Intensity;
+            float _amb = mainLight.intensity - .1f;
+            _amb = Mathf.Min(ambientLight_Intensity, _amb);
+            ambientFillLight.intensity = _amb;
         }
     }
 
     void GetPhaseData(float time, out SkyPhase current, out SkyPhase next, out float t)
     {
-        if (time > 0.125f && time < 0.375f)
+        if (time > phaseTimeShifts[0] && time < phaseTimeShifts[1])
         {
             current = SkyPhase.Sunrise;
             next = SkyPhase.Day;
-            t = Mathf.InverseLerp(0.15f, 0.375f, time);
+            t = Mathf.InverseLerp(phaseTimeShifts[0], phaseTimeShifts[1], time);
+
         }
-        else if (time > 0.125f && time < 0.625f)
+        else if (time > phaseTimeShifts[0] && time < phaseTimeShifts[2])
         {
             current = SkyPhase.Day;
             next = SkyPhase.Sunset;
-            t = Mathf.InverseLerp(0.375f, 0.625f, time);
+            t = Mathf.InverseLerp(phaseTimeShifts[1], phaseTimeShifts[2], time);
+
         }
-        else if(time > 0.125f && time < 0.875f)
+        else if(time > phaseTimeShifts[0] && time < phaseTimeShifts[3])
         {
             current = SkyPhase.Sunset;
             next = SkyPhase.Night;
-            t = Mathf.InverseLerp(0.625f, 0.875f, time);
+            t = Mathf.InverseLerp(phaseTimeShifts[2], phaseTimeShifts[3], time);
+
         }
-        else if (time > 0.125f && time >= 0.875f)
+        else if (time > phaseTimeShifts[0] && time >= phaseTimeShifts[3])
         {
             current = SkyPhase.Night;
             next = SkyPhase.Sunrise;
-            t = Mathf.InverseLerp(.875f, 1f, time);
+            t = Mathf.InverseLerp(phaseTimeShifts[3], 1f, time);
+
         }
         else
         {
             current = SkyPhase.Sunrise;
             next = SkyPhase.Day;
-            t = Mathf.InverseLerp(0, 1f, time);
+            t = Mathf.InverseLerp(0f, 1f, time);
+
         }
     }
 
