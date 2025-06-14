@@ -401,7 +401,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  sunMultiplier: 2.5
+  sunMultiplier: 1.5
   sunBlendCurve:
     serializedVersion: 2
     m_Curve:
@@ -608,7 +608,7 @@ MonoBehaviour:
     midColor: {r: 1, g: 0.3734791, b: 0.11792451, a: 1}
     horizonColor: {r: 0.48672274, g: 0.13112536, b: 0.023332542, a: 1}
   nightColors:
-    zenithColor: {r: 0.011555556, g: 0.007999999, b: 0.04, a: 1}
+    zenithColor: {r: 0.008757474, g: 0.0060628657, b: 0.03031433, a: 1}
     midColor: {r: 0.04, g: 0.04, b: 0.36, a: 1}
     horizonColor: {r: 0.23922014, g: 0.23922014, b: 0.46182778, a: 1}
   amb_sunriseColors:
@@ -634,13 +634,7 @@ MonoBehaviour:
   - 0.375
   - 0.62
   - 0.875
-  minLightSourceAngle:
-  - 43
-  - 43
-  - 43
-  - 43
-  - 43
-  minShadowAngle: 1
+  envUpdateInterval: 0.1
 --- !u!4 &246606161
 Transform:
   m_ObjectHideFlags: 0
@@ -1004,7 +998,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 8600000, guid: cb16dd168e23e4f02b042a4e10accf16, type: 2}
+  m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0

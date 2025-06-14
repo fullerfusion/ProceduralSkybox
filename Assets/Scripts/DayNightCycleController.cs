@@ -65,7 +65,7 @@ public class DayNightCycleController : MonoBehaviour
     public SkyPhaseColors amb_nightColors;
     public GameObject fakeMoon;
     public GameObject fakeSun;
-    public List<float> phaseTimeShifts = new List<float>() { 0.125f,  0.375f, 0.62f, 0.875f };
+    public List<float> phaseTimeShifts = new List<float>() { 0.125f,  0.375f, 0.62f, 0.80f };
     // Optimization cache
     private float lastEnvUpdate = 0f;
     public float envUpdateInterval = 0.1f;
